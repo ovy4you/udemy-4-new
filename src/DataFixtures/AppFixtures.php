@@ -39,7 +39,7 @@ class AppFixtures extends Fixture
                 ->setTitle('title' . $i)
                 ->setText('blog-post' . $i)
                 ->setPublished(new \DateTime());
-
+            $this->addReference('blog_post'.$i, $blogPost);
             $manager->persist($blogPost);
         }
         $manager->flush();
@@ -50,10 +50,12 @@ class AppFixtures extends Fixture
 
         $user = $this->getReference('admin');
 
-        for ($i = 0; $i < 40; $i++) {
+        for ($j = 0; $j < 40; $j++) {
+            $blogPost = $this->getReference('blog_post'.$j);
             $comment = new Comment();
-            $comment->setContent('comment' . $i)
+            $comment->setContent('comment' . $j)
                 ->setAuthor($user)
+                ->setBlogPost($blogPost)
                 ->setPublished(new \DateTime());
             $manager->persist($comment);
         }
