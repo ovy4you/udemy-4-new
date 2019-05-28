@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="dms">
+  <component name="PublishConfigData" serverName="udemy-4-new">
     <serverData>
-      <paths name="dms">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="wms-all47891-all-dev.dmsi.c.emag.network">
+      <paths name="udemy-4-new">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
