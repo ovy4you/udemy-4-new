@@ -10,16 +10,16 @@ class BlogPostFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-         $blogPost = new BlogPost();
-
-         $blogPost->setText('text')
-             ->setAuthor('voodi')
-             ->setSlug('voodiu-')
-             ->setTitle('tiotle')
-             ->setPublished(new \DateTime());
-
-         $manager->persist($blogPost);
-
-        $manager->flush();
+//         $blogPost = new BlogPost();
+//
+//         $blogPost->setText('text')
+//             ->setAuthor('voodi')
+//             ->setSlug('voodiu-')
+//             ->setTitle('tiotle')
+//             ->setPublished(new \DateTime());
+//
+//         $manager->persist($blogPost);
+//
+//        $manager->flush();
     }
 }
