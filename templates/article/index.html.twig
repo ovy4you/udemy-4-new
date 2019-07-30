@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        {% for id, post in posts %}
+            <p><a href="{{ path('article_show',{'id':id}) }}">ID {{ id }}</a></p>
+            <h3>{{ post.title }}</h3>
+            <p>ID {{ post.text }}</p>
+            {% else %}
+            nada
+        {% endfor %}
+    </div>
+{% endblock %}

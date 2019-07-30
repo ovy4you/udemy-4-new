@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <p><a href="{{ path('article_show',{'id':id}) }}">ID {{ id }}</a></p>
+    <h3>{{ post.title }}</h3>
+    <p>ID {{ post.text }}</p>
+    <p>ID {{ post.date|date('Y-m-d h:i:s') }}</p>
+    <p>{{ post.price|price }}</p>
+    <p>here is the current {{ locale }}</p>
+    <p>{{ message }}</p>
+</div>
+{% endblock %}
