@@ -16,15 +16,7 @@
             padding: 2px 6px;
         }
     </style>
-
     <div class="example-wrapper">
-        {% for message in app.flashes('notice') %}
-            {{ message }}
-        {% endfor %}
-        {% for post in posts %}
-            {{  include ('micro_post/partial/post.html.twig',{'post':post}) }}
-        {% endfor %}
-
-        <a href="{{ path('micro_post_add') }}">add micropost</a>
+        {{ include ('micro_post/partial/post.html.twig',{'post':post}) }}
     </div>
 {% endblock %}

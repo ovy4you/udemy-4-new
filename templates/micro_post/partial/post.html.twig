@@ -1,0 +1,10 @@
+<h1>Hello {{ post.text }}! ✅</h1>
+
+This friendly message is coming from:
+<ul>
+    <li>Your controller at <code><a
+                    href="{{ path('micro_post_post',{'id':post.id}) }}">{{ post.time|date('y-m-d h:i:s') }}</a></code>
+        <a href="{{ path('micro_post_edit',{'id':post.id}) }}">Edit</a>
+        <a href="{{ path('micro_post_delete',{'id':post.id}) }}">delete</a>
+    </li>
+</ul>
