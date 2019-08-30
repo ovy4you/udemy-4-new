@@ -17,7 +17,7 @@
         }
     </style>
 
-    <div class="example-wrapper">
+    <div class="example-wrapper">{{ include ('micro_post/partial/menu.html.twig') }}
         {% for message in app.flashes('notice') %}
             {{ message }}
         {% endfor %}

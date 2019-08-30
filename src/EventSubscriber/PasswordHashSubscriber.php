@@ -32,12 +32,12 @@ class PasswordHashSubscriber implements EventSubscriberInterface
 
     public function hasPassword(GetResponseForControllerResultEvent $event)
     {
-        $user = $event->getControllerResult();
-        $method = $event->getRequest()->getMethod();
-        if (!$user instanceof User || Request::METHOD_POST !== $method) {
-            return;
-        }
-        $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
+//        $user = $event->getControllerResult();
+//        $method = $event->getRequest()->getMethod();
+//        if (!$user instanceof User || Request::METHOD_POST !== $method) {
+//            return;
+//        }
+//        $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
     }
 
 }

@@ -13,14 +13,14 @@ class MicroPostFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        for($i=0;$i<10;$i++){
-            $micropost = new MicroPost();
-            $micropost->setText('Some randm text'.rand(1,100));
-            $micropost->setTime(new \DateTime(- rand(1,100).'day'));
-            $manager->persist($micropost);
-
-
-        }
+//        for($i=0;$i<10;$i++){
+//            $micropost = new MicroPost();
+//            $micropost->setText('Some randm text'.rand(1,100));
+//            $micropost->setTime(new \DateTime(- rand(1,100).'day'));
+//            $manager->persist($micropost);
+//
+//
+//        }
         $manager->flush();
     }
 }

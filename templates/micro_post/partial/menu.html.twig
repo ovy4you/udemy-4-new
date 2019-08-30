@@ -1,0 +1,5 @@
+{% if is_granted('ROLE_USER') %}
+    <a href="{{ path('security_logout') }}">logout</a>
+{% else %}
+    <a href="{{ path('security_login') }}">login</a>
+{% endif %}

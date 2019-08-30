@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\MicroPost;
+use App\Entity\ProfileUser;
 use App\Form\MicroPostType;
 use App\Repository\MicroPostRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -61,7 +63,7 @@ class MicroPostController extends AbstractController
     public function index()
     {
         return $this->render('micro_post/index.html.twig', [
-            'posts' => $this->microPostRepository->findAll([], ['time' => 'desc']),
+            'posts' => $this->microPostRepository->findAll(),
         ]);
     }
 
@@ -70,8 +72,9 @@ class MicroPostController extends AbstractController
      */
     public function add(Request $request)
     {
+        $user = $this->getUser();
         $microPost = new MicroPost();
-        $microPost->setTime(new \DateTime());
+        $microPost->setUser($user);
 
         $form = $this->formFactory->create(MicroPostType::class, $microPost);
         $form->handleRequest($request);
@@ -94,6 +97,7 @@ class MicroPostController extends AbstractController
      */
     public function edit(MicroPost $microPost, Request $request)
     {
+        $this->denyAccessUnlessGranted('edit', $microPost);
         $form = $this->formFactory->create(MicroPostType::class, $microPost);
         $form->handleRequest($request);
 
@@ -109,12 +113,13 @@ class MicroPostController extends AbstractController
 
     /**
      * @Route("/delete/{id}", name="micro_post_delete")
+     * @Security("is_granted('delete',microPost)")
      */
     public function delete(MicroPost $microPost)
     {
         $this->entityManager->remove($microPost);
         $this->entityManager->flush();
-        $this->flashBag->add('notice','micropost was deleted');
+        $this->flashBag->add('notice', 'micropost was deleted');
 
         return new RedirectResponse($this->router->generate('micro_post'));
     }
@@ -126,6 +131,17 @@ class MicroPostController extends AbstractController
     {
         return $this->render('micro_post/post.html.twig', [
             'post' => $microPost,
+        ]);
+    }
+
+    /**
+     * @Route("/user/{id}", name="micro_post_user")
+     */
+    public function userPosts(ProfileUser $profileUser)
+    {
+        return $this->render('micro_post/user.html.twig', [
+            'posts' => $this->microPostRepository->findBy(['user' => $profileUser]),
+            'user' => $profileUser
         ]);
     }
 }

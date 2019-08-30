@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MicroPostRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class MicroPost
 {
@@ -26,6 +30,17 @@ class MicroPost
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $time;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProfileUser", inversedBy="microPosts")
+     */
+    private $user;
+
+    public function __construct()
+    {
+
+    }
 
     public function getId(): ?int
     {
@@ -54,5 +69,24 @@ class MicroPost
         $this->time = $time;
 
         return $this;
+    }
+
+
+    public function getUser(): ?ProfileUser
+    {
+        return $this->user;
+    }
+
+    public function setUser(?ProfileUser $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /** @ORM\PrePersist() */
+    public function setTimeOnPersist()
+    {
+        $this->time = new \DateTime();
     }
 }

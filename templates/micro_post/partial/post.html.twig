@@ -3,8 +3,14 @@
 This friendly message is coming from:
 <ul>
     <li>Your controller at <code><a
-                    href="{{ path('micro_post_post',{'id':post.id}) }}">{{ post.time|date('y-m-d h:i:s') }}</a></code>
-        <a href="{{ path('micro_post_edit',{'id':post.id}) }}">Edit</a>
-        <a href="{{ path('micro_post_delete',{'id':post.id}) }}">delete</a>
+                    href="{{ path('micro_post_post',{'id':post.id}) }}">{{ post.time|date('y-m-d h:i:s') }}</a>
+            {% if post.user %}
+                <a href="{{ path('micro_post_user',{'id': post.user.id}) }}">{{ post.user.email }}</a>
+            {% endif %}
+
+        </code>
+        {% if is_granted('edit',post) %} <a href="{{ path('micro_post_edit',{'id':post.id}) }}">Edit</a> {% endif %}
+        {% if is_granted('delete',post) %}   <a href="{{ path('micro_post_delete',{'id':post.id}) }}">delete</a>
+        {% endif %}
     </li>
 </ul>
